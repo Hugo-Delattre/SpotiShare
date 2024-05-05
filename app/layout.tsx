@@ -3,12 +3,14 @@ import { Figtree } from "next/font/google";
 import "./globals.css";
 import { Sidebar } from "@/components/Sidebar";
 import { SideBarItem } from "@/components/SideBarItem";
+import SupabaseProvider from "@/providers/SupabaseProvider";
+import UserProvider from "@/providers/UserProvider";
 
 const font = Figtree({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Spotify Clone",
-  description: "Listen to your favorite music.",
+  title: "SpotiShare",
+  description: "Listen and share your music with your friends, for free!",
 };
 
 export default function RootLayout({
@@ -19,7 +21,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
-        <Sidebar>{children}</Sidebar>
+        <SupabaseProvider>
+          <UserProvider>
+            <Sidebar>{children}</Sidebar>
+          </UserProvider>
+        </SupabaseProvider>
       </body>
     </html>
   );
